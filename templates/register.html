@@ -10,7 +10,7 @@
     <body>
         <h1>Register User</h1>
         
-        <form action="/register_user" method="post">
+        <form action="/register_user" method="post" enctype="multipart/form-data">
             <img src="../static/images/registerImage.png"/>
             
             <div>
@@ -18,6 +18,10 @@
                 <label>Name</label> <input type="text" name="name"/><br/><br/>
                 <label>LastName</label> <input type="text" name="lastname"/><br/><br/>
                 <label>Birthday</label> <input type="date" name="birthday"/><br/><br/>
+                
+                 <label>Choose a file to upload:</label><br/><br/>
+                     <input type="file" name="photo"/><br/><br/>
+                
                 <button onClick="{register_user()}">Register</button>
             </div>
         </form>
