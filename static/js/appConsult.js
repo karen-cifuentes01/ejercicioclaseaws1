@@ -12,6 +12,7 @@ function consult_user(){
         {
             obj_data = data.name+" " + data.lastname+"\n"+data.birthday
             document.getElementById("txt_data").value= obj_data
+            document.getElementById("photoUser").src = "https://aws-classbucketimages.s3.amazonaws.com/" + data.photos3
         }
         else{
             alert("User not found!")

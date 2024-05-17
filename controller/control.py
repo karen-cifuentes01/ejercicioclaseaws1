@@ -1,6 +1,6 @@
 from flask import render_template, request, jsonify
 from database.db import connectionSQL, insert_records, consult_records
-from controller.s3_control import connection_s3, upload_file_s3, save_file
+from controller.s3_control import connection_s3, upload_file_s3, save_file, get_file_s3
         
 
 def func_register_user():
@@ -18,16 +18,18 @@ def func_register_user():
 
 def func_consult_user():
     data_id =request.get_json()
-    print(data_id)
     result = consult_records(data_id["id"])
     if result != None and len(result) != 0:
+        s3_connection = connection_s3()
+        name_file = get_file_s3(s3_connection, data_id["id"])
         name = result[0][1]
         lastname = result[0][2]
         birthday = result[0][3]
         resp_data = {"status":"ok",
             "name":name,
             "lastname":lastname,
-            "birthday":birthday
+            "birthday":birthday,
+            "photos3":name_file
         }
     else:
         resp_data = {"status":"error"}
